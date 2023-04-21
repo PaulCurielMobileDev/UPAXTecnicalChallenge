@@ -12,7 +12,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.mexicandeveloper.upaxpruebatecnica.R
 import com.mexicandeveloper.upaxpruebatecnica.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
