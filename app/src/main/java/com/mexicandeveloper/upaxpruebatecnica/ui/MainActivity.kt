@@ -1,7 +1,6 @@
 package com.mexicandeveloper.upaxpruebatecnica.ui
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -10,6 +9,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
+import com.google.android.material.appbar.MaterialToolbar
 import com.mexicandeveloper.upaxpruebatecnica.R
 import com.mexicandeveloper.upaxpruebatecnica.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,16 +29,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        binding.toolbar.navigationIcon =
+            ContextCompat.getDrawable(this, R.drawable.ic_back)
+
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
-        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,5 +60,13 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    fun getToolBar(): MaterialToolbar? {
+        return try {
+            binding.toolbar
+        } catch (e: UninitializedPropertyAccessException) {
+            null
+        }
     }
 }

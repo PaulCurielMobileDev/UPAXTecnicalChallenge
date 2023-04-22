@@ -1,6 +1,5 @@
 package com.mexicandeveloper.upaxpruebatecnica.ui.pokemon
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mexicandeveloper.upaxpruebatecnica.data.entities.Pokemon

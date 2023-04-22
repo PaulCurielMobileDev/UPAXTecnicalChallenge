@@ -3,7 +3,7 @@ package com.mexicandeveloper.upaxpruebatecnica.utils
 import android.content.Context
 import com.google.gson.GsonBuilder
 import com.mexicandeveloper.upaxpruebatecnica.BaseApplication
-import com.mexicandeveloper.upaxpruebatecnica.data.PokemonAPI
+import com.mexicandeveloper.upaxpruebatecnica.data.remote.PokemonAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +20,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
+
+
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
@@ -34,8 +36,7 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL).client(client)
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .build()
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create())).build()
     }
 
     private val READ_TIMEOUT = 30
@@ -46,8 +47,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        headerInterceptor: Interceptor,
-        cache: Cache
+        headerInterceptor: Interceptor, cache: Cache
     ): OkHttpClient {
 
         val okHttpClientBuilder = OkHttpClient().newBuilder()

@@ -1,4 +1,4 @@
-package com.mexicandeveloper.upaxpruebatecnica.data
+package com.mexicandeveloper.upaxpruebatecnica.data.remote
 
 
 import com.mexicandeveloper.upaxpruebatecnica.data.entities.PokemonListResponse

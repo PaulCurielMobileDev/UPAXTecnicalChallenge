@@ -8,6 +8,20 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="base_experience">Experience</string>
+    <string name="height">Height</string>
+    <string name="id">Id</string>
+    <string name="name">Experience</string>
+    <string name="order">Order</string>
+    <string name="weight">Weight</string>
+    <string name="type1">Type 1</string>
+    <string name="type2">Type 2</string>
+    <string name="not">--</string>
+
+
+
+
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
