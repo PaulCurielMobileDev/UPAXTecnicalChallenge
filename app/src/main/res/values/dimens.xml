@@ -1,3 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="corner_radius">10dp</dimen>
+    <dimen name="stroke">6dp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size_big">25sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
 </resources>
