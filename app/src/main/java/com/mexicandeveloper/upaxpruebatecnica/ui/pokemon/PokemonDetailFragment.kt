@@ -12,7 +12,7 @@ import com.mexicandeveloper.upaxpruebatecnica.databinding.FragmentPokemonDetailB
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class PokemonDetail : Fragment() {
+class PokemonDetailFragment : Fragment() {
 
     private var _binding: FragmentPokemonDetailBinding? = null
 

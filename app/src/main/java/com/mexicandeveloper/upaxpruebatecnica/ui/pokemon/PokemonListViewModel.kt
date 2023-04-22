@@ -23,12 +23,10 @@ class PokemonListViewModel @Inject constructor(private val useCase: GetPokemonLi
     private val pokemons: MutableList<Pokemon> = mutableListOf()
 
     init {
-        Log.d("Soliciting Pokemons", "0<<<<<<<<<<<<<<<<<<<<<")
         getPokemonListResponse(0)
     }
 
     private fun getPokemonListResponse(offset: Int = 0) {
-        Log.d("NumOfPokemons", "${pokemons.size}<<<<<<<<<<<<<<<<<<<<<")
         if (pokemons.size > offset) _uiState.value = State.DataState(pokemons)
         else {
             viewModelScope.launch {
@@ -37,43 +35,17 @@ class PokemonListViewModel @Inject constructor(private val useCase: GetPokemonLi
                     if (it is State.DataState) {
                         it.data.let { newPokemons ->
                             pokemons.addAll(newPokemons)
-                            Log.d("NumOfPokemons", "${pokemons.size}<<<<<<<<<<<<<<<<<<<<<")
                             _uiState.value = State.DataState(pokemons)
                         }
                     }else{
                         _uiState.value = it
                     }
-
-
                 }
             }
         }
-
-
-        /*flow {
-
-            _uiState.value = State.LoadingState
-
-            try {
-
-                if (pokemons.size == offset) {
-                    val newPokemons = useCase(offset)
-                    pokemons.addAll(newPokemons)
-                    _uiState.value=State.DataState(newPokemons)
-                } else {
-                    _uiState.value=State.DataState(pokemons)
-                }
-
-            } catch (e: java.lang.Exception) {
-                _uiState.value=State.ErrorState(e)
-            }
-
-
-    }*/
     }
 
     fun addPokemon(offset: Int) {
-        Log.d("SolicitingPokemons", "${offset}<<<<<<<<<<<<<<<<<<<<<")
         if (uiState.value !is State.LoadingState) {
             getPokemonListResponse(offset)
         }
