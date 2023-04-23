@@ -16,7 +16,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
@@ -30,24 +29,16 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.mexicandeveloper.upaxpruebatecnica.R;
 
-import java.util.Locale;
-
 @SuppressLint("AppCompatCustomView")
 public class CircleImageView extends ImageView {
 
-    private static final int DEF_PRESS_HIGHLIGHT_COLOR = 0x32000000;
-
     private Shader mBitmapShader;
     private Matrix mShaderMatrix;
-
     private RectF mBitmapDrawBounds;
     private RectF mStrokeBounds;
-
     private Bitmap mBitmap;
-
     private Paint mBitmapPaint;
     private Paint mStrokePaint;
-
     private boolean mInitialized;
     private String name = "";
     private String url;
@@ -69,7 +60,6 @@ public class CircleImageView extends ImageView {
 
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, 0, 0);
-
             strokeColor = a.getColor(R.styleable.CircleImageView_strokeColor, Color.TRANSPARENT);
             bkColor = a.getColor(R.styleable.CircleImageView_backgroundColor, Color.BLACK);
             textColor = a.getColor(R.styleable.CircleImageView_textFillColor, Color.WHITE);
@@ -77,12 +67,10 @@ public class CircleImageView extends ImageView {
             name = a.getNonResourceString(R.styleable.CircleImageView_name);
             url = a.getNonResourceString(R.styleable.CircleImageView_url);
             placeHolder = a.getDrawable(R.styleable.CircleImageView_placeholder);
-
-
             a.recycle();
         }
 
-        if(strokeColor==Color.TRANSPARENT) strokeColor=textColor;
+        if (strokeColor == Color.TRANSPARENT) strokeColor = textColor;
 
         mShaderMatrix = new Matrix();
         mBitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -92,13 +80,10 @@ public class CircleImageView extends ImageView {
         mStrokePaint.setColor(strokeColor);
         mStrokePaint.setStyle(Paint.Style.STROKE);
         mStrokePaint.setStrokeWidth(strokeWidth);
-
-
         mInitialized = true;
-
         setupBitmap();
 
-        if(url!=null && !url.isEmpty()) {
+        if (url != null && !url.isEmpty()) {
             setUrl(url);
         }
     }
@@ -126,7 +111,8 @@ public class CircleImageView extends ImageView {
         super.setImageURI(uri);
         setupBitmap();
     }
-    public void setUrl(@NonNull String url){
+
+    public void setUrl(@NonNull String url) {
         Glide.with(getContext()).asDrawable().load(url).
                 into(new CustomTarget<Drawable>() {
                     @Override
@@ -139,8 +125,6 @@ public class CircleImageView extends ImageView {
 
                     }
                 });
-
-
     }
 
     @Override
@@ -158,12 +142,11 @@ public class CircleImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(getDrawable()==null){
+        if (getDrawable() == null) {
             drawName(canvas);
-        }else {
+        } else {
             drawBitmap(canvas);
         }
-
     }
 
     public void setName(String name) {
@@ -200,12 +183,14 @@ public class CircleImageView extends ImageView {
     protected void drawBitmap(Canvas canvas) {
         canvas.drawOval(mBitmapDrawBounds, mBitmapPaint);
     }
-    private boolean notAlpha(char one){
-        String minus="ABCDEFGHIJKLMNOPQRSTUVWXYZÑabcdefghijklmnopqrstuvwxyzñ";
+
+    private boolean notAlpha(char one) {
+        String minus = "ABCDEFGHIJKLMNOPQRSTUVWXYZÑabcdefghijklmnopqrstuvwxyzñ";
         return !minus.contains("" + one);
     }
-    protected void drawName(Canvas canvas){
-        if (name == null || name.isEmpty() || notAlpha(name.charAt(0)) ) {
+
+    protected void drawName(Canvas canvas) {
+        if (name == null || name.isEmpty() || notAlpha(name.charAt(0))) {
             drawBitmap(canvas);
         } else {
             Paint mpaint = new Paint();
@@ -272,8 +257,6 @@ public class CircleImageView extends ImageView {
         float dy;
         float scale;
 
-        // scale up/down with respect to this view size and maintain aspect ratio
-        // translate bitmap position with dx/dy to the center of the image
         if (mBitmap.getWidth() < mBitmap.getHeight()) {
             scale = mBitmapDrawBounds.width() / (float) mBitmap.getWidth();
             dx = mBitmapDrawBounds.left;
@@ -307,6 +290,4 @@ public class CircleImageView extends ImageView {
 
         return bitmap;
     }
-
-
 }

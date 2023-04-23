@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.mexicandeveloper.upaxpruebatecnica.data.entities.Pokemon
 import com.mexicandeveloper.upaxpruebatecnica.databinding.RowPokemonBinding
 import com.mexicandeveloper.upaxpruebatecnica.databinding.RowProgressbarBinding
+import com.mexicandeveloper.upaxpruebatecnica.utils.Constants
 import java.util.*
 
 class PokemonAdapter(var items: List<Pokemon>, var listener: RVListener) :
@@ -28,6 +29,8 @@ class PokemonAdapter(var items: List<Pokemon>, var listener: RVListener) :
         fun bind(item: Pokemon) {
             val text = "${adapterPosition + 1}  ${item.name.uppercase(Locale.getDefault())}"
             binding.tvName.text = text
+            binding.ivImage.setName(item.name)
+            binding.ivImage.setUrl(Constants.BASE_URL_SPRITE_FRONTAL.replace("{NUM}","${adapterPosition+1}"))
         }
     }
 

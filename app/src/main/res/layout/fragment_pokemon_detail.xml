@@ -28,7 +28,7 @@
             android:id="@+id/ivDetailSpriteDefault"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:placeholder="@mipmap/ic_launcher"
+            app:placeholder="@drawable/placeholder"
             app:strokeColor="@color/black"
             app:strokeWidth="@dimen/stroke"
             app:backgroundColor="@color/red"
