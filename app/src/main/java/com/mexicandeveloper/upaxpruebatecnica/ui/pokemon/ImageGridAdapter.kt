@@ -5,7 +5,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.mexicandeveloper.upaxpruebatecnica.data.entities.Sprites
+import com.mexicandeveloper.upaxpruebatecnica.data.models.Sprites
 
 class ImageGridAdapter(private val sprites: Sprites) :
     RecyclerView.Adapter<ImageGridAdapter.ImageViewHolder>() {

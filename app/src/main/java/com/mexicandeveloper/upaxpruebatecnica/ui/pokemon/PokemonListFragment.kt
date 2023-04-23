@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mexicandeveloper.upaxpruebatecnica.data.entities.Pokemon
+import com.mexicandeveloper.upaxpruebatecnica.data.entities.PokemonEntity
 import com.mexicandeveloper.upaxpruebatecnica.databinding.FragmentPokemonListBinding
 import com.mexicandeveloper.upaxpruebatecnica.utils.State
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +39,7 @@ class PokemonListFragment : Fragment(), PokemonAdapter.RVListener {
     ): View {
         _binding = FragmentPokemonListBinding.inflate(inflater, container, false)
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     when (uiState) {
@@ -48,12 +48,12 @@ class PokemonListFragment : Fragment(), PokemonAdapter.RVListener {
                         }
                         is State.DataState -> {
                             uiState.data.let { items ->
-                                if (binding.rvPokemon.adapter == null)
-                                    binding.rvPokemon.adapter =
-                                        PokemonAdapter(items, this@PokemonListFragment)
-                                else {
-                                    val adapter = binding.rvPokemon.adapter as PokemonAdapter
-                                    lifecycleScope.launch(Dispatchers.Main) {
+                                lifecycleScope.launch(Dispatchers.Main) {
+                                    if (binding.rvPokemon.adapter == null) {
+                                        binding.rvPokemon.adapter =
+                                            PokemonAdapter(items, this@PokemonListFragment)
+                                    } else {
+                                        val adapter = binding.rvPokemon.adapter as PokemonAdapter
                                         adapter.add(items)
                                     }
                                 }
@@ -79,6 +79,7 @@ class PokemonListFragment : Fragment(), PokemonAdapter.RVListener {
         super.onViewCreated(view, savedInstanceState)
         binding.rvPokemon.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
     }
 
     override fun onDestroyView() {
@@ -86,20 +87,14 @@ class PokemonListFragment : Fragment(), PokemonAdapter.RVListener {
         _binding = null
     }
 
-    override fun onItemClick(item: Pokemon) {
-        try {
-            val theUrls = item.url.dropLast(1).split("/")
-            val last = theUrls.last().toInt()
-            val action = PokemonListFragmentDirections.goToDetail(last)
-            findNavController().navigate(action)
-        } catch (e: java.lang.Exception) {
-            Log.e("Pokemon Number", e.message ?: e.localizedMessage ?: e.toString())
-            Toast.makeText(requireContext(), "No se encontro el número", Toast.LENGTH_SHORT).show()
-        }
+    override fun onItemClick(item: PokemonEntity) {
+        val action = PokemonListFragmentDirections.goToDetail(item.id)
+        findNavController().navigate(action)
 
     }
 
-    override fun onBottomReachListener(size: Int) {
-        viewModel.addPokemon(size)
+    override fun onBottomReachListener(lastId: Int) {
+        Log.d("AddPokemons", "Pidiendp ${lastId}<<<<<<<<<<<<<<<<<<")
+        viewModel.addPokemon(lastId)
     }
 }

@@ -1,4 +1,4 @@
-package com.mexicandeveloper.upaxpruebatecnica.data.entities
+package com.mexicandeveloper.upaxpruebatecnica.data.models
 
 data class PokemonListResponse(
     var count: Int,

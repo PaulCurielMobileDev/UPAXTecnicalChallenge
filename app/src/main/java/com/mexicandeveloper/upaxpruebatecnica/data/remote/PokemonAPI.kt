@@ -1,8 +1,8 @@
 package com.mexicandeveloper.upaxpruebatecnica.data.remote
 
 
-import com.mexicandeveloper.upaxpruebatecnica.data.entities.PokemonListResponse
-import com.mexicandeveloper.upaxpruebatecnica.data.entities.PokemonResponse
+import com.mexicandeveloper.upaxpruebatecnica.data.models.PokemonListResponse
+import com.mexicandeveloper.upaxpruebatecnica.data.models.PokemonResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

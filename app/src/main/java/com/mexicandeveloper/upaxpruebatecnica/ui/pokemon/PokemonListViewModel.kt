@@ -2,7 +2,7 @@ package com.mexicandeveloper.upaxpruebatecnica.ui.pokemon
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mexicandeveloper.upaxpruebatecnica.data.entities.Pokemon
+import com.mexicandeveloper.upaxpruebatecnica.data.entities.PokemonEntity
 import com.mexicandeveloper.upaxpruebatecnica.domain.GetPokemonListUseCase
 import com.mexicandeveloper.upaxpruebatecnica.utils.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,11 +15,11 @@ import javax.inject.Inject
 class PokemonListViewModel @Inject constructor(private val useCase: GetPokemonListUseCase) :
     ViewModel() {
 
-    private val _uiState: MutableStateFlow<State<List<Pokemon>>> =
+    private val _uiState: MutableStateFlow<State<List<PokemonEntity>>> =
         MutableStateFlow(State.LoadingState)
-    val uiState: StateFlow<State<List<Pokemon>>> = _uiState
+    val uiState: StateFlow<State<List<PokemonEntity>>> = _uiState
 
-    private val pokemons: MutableList<Pokemon> = mutableListOf()
+    private val pokemons: MutableList<PokemonEntity> = mutableListOf()
 
     init {
         getPokemonListResponse(0)

@@ -19,9 +19,6 @@ import com.mexicandeveloper.upaxpruebatecnica.utils.State
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 @AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
 
