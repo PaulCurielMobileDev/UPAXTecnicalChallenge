@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.mexicandeveloper.upaxpruebatecnica.R
 import com.mexicandeveloper.upaxpruebatecnica.databinding.FragmentPokemonDetailBinding
 import com.mexicandeveloper.upaxpruebatecnica.ui.MainActivity
@@ -73,11 +72,12 @@ class PokemonDetailFragment : Fragment() {
                                     binding.tvDetailType2.text = "${it[1].type?.name}"
                             }
 
+                            (activity as MainActivity).getToolBar()?.title = name?.uppercase()
+                            binding.ivDetailSpriteDefault.setName(name?.uppercase())
 
-
-                            Glide.with(binding.ivDetailSpriteDefault.context)
-                                .load(sprites?.frontDefault).circleCrop()
-                                .into(binding.ivDetailSpriteDefault)
+                            sprites?.frontDefault?.let { url ->
+                                binding.ivDetailSpriteDefault.setUrl(url)
+                            }
 
                             sprites?.let { theSprites ->
                                 binding.rvDetailImages.layoutManager = GridLayoutManager(

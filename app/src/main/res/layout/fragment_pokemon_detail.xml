@@ -24,9 +24,23 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
-        <ImageView
-            android:contentDescription="@string/not"
+        <com.mexicandeveloper.upaxpruebatecnica.utils.CircleImageView
             android:id="@+id/ivDetailSpriteDefault"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:placeholder="@mipmap/ic_launcher"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/stroke"
+            app:backgroundColor="@color/red"
+            app:textFillColor="@color/yellow"
+            app:layout_constraintBottom_toTopOf="@+id/tvDetailExperienceTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <ImageView
+            android:visibility="gone"
+            android:contentDescription="@string/not"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:scaleType="fitCenter"
