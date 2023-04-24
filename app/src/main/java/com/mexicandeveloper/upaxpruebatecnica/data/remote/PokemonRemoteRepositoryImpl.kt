@@ -22,8 +22,6 @@ class PokemonRemoteRepositoryImpl @Inject constructor(private val api: PokemonAP
     }
 
     override suspend fun getPokemon(pokemonNumber: Int): Flow<State<PokemonResponse>> = flow {
-
-        emit(State.LoadingState)
         try {
             emit(State.DataState(api.getPokemon(pokemonNumber)))
         }catch (e:java.lang.Exception){

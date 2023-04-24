@@ -12,7 +12,7 @@ data class PokemonDetailEntity (
     @ColumnInfo("name") var name: String,
     @ColumnInfo("order") var order: Int,
     @ColumnInfo("sprites") var sprites: ArrayList<String>,
-    @ColumnInfo("type1") var type1:String?,
-    @ColumnInfo("type2") var type2:String?,
-    @ColumnInfo("weight") var weight: Int? = null
+    @ColumnInfo("type1") var type1:String,
+    @ColumnInfo("type2") var type2:String,
+    @ColumnInfo("weight") var weight: Int
 )

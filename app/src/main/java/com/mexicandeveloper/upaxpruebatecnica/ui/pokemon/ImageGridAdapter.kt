@@ -7,22 +7,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.mexicandeveloper.upaxpruebatecnica.data.models.Sprites
 
-class ImageGridAdapter(private val sprites: Sprites) :
+class ImageGridAdapter(private val imageList: ArrayList<String>) :
     RecyclerView.Adapter<ImageGridAdapter.ImageViewHolder>() {
-
-    val imageList: List<String>
-        get() {
-            val mutableList = mutableListOf<String>()
-            if (!sprites.backDefault.isNullOrEmpty()) mutableList.add(sprites.backDefault!!)
-            if (!sprites.backFemale.isNullOrEmpty()) mutableList.add(sprites.backFemale!!)
-            if (!sprites.backShiny.isNullOrEmpty()) mutableList.add(sprites.backShiny!!)
-            if (!sprites.backShinyFemale.isNullOrEmpty()) mutableList.add(sprites.backShinyFemale!!)
-            if (!sprites.frontDefault.isNullOrEmpty()) mutableList.add(sprites.frontDefault!!)
-            if (!sprites.frontFemale.isNullOrEmpty()) mutableList.add(sprites.frontFemale!!)
-            if (!sprites.frontShiny.isNullOrEmpty()) mutableList.add(sprites.frontShiny!!)
-            if (!sprites.frontShinyFemale.isNullOrEmpty()) mutableList.add(sprites.frontShinyFemale!!)
-            return mutableList.toList()
-        }
 
 
     inner class ImageViewHolder(private var theImage: ImageView) : ViewHolder(theImage) {

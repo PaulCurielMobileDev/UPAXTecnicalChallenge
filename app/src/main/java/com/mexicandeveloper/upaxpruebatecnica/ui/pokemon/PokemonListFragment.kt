@@ -26,11 +26,9 @@ import kotlinx.coroutines.launch
 class PokemonListFragment : Fragment(), PokemonAdapter.RVListener {
 
     private var _binding: FragmentPokemonListBinding? = null
-    private val viewModel: PokemonListViewModel by viewModels()
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private val viewModel: PokemonListViewModel by viewModels()
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onCreateView(
@@ -60,11 +58,13 @@ class PokemonListFragment : Fragment(), PokemonAdapter.RVListener {
                             }
                         }
                         is State.ErrorState -> {
-                            Toast.makeText(
-                                requireContext(),
-                                uiState.exception.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    uiState.exception.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
 

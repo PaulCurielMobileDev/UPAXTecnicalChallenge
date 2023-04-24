@@ -1,5 +1,6 @@
 package com.mexicandeveloper.upaxpruebatecnica.data.local
 
+import com.mexicandeveloper.upaxpruebatecnica.data.entities.PokemonDetailEntity
 import com.mexicandeveloper.upaxpruebatecnica.data.entities.PokemonEntity
 import com.mexicandeveloper.upaxpruebatecnica.utils.Constants
 import kotlinx.coroutines.flow.Flow
@@ -16,5 +17,13 @@ class PokemonLocalRepositoryImpl @Inject constructor(private val dao: PokemonDAO
 
     override suspend fun insertAll(pokemons: List<PokemonEntity>) {
         dao.insertAll(*pokemons.toTypedArray())
+    }
+
+    override suspend fun getPokemonDetail(pokemonId: Int): Flow<List<PokemonDetailEntity>> {
+        return flow { emit(dao.getPokemonDetail(pokemonId)) }
+    }
+
+    override suspend fun insertPokemonDetail(pokemon: PokemonDetailEntity) {
+        dao.insertDetail(pokemon)
     }
 }

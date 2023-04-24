@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mexicandeveloper.upaxpruebatecnica.R
 import com.mexicandeveloper.upaxpruebatecnica.databinding.FragmentPokemonDetailBinding
 import com.mexicandeveloper.upaxpruebatecnica.ui.MainActivity
+import com.mexicandeveloper.upaxpruebatecnica.utils.Constants
 import com.mexicandeveloper.upaxpruebatecnica.utils.State
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -61,30 +62,26 @@ class PokemonDetailFragment : Fragment() {
                             binding.tvDetailId.text = "$id"
                             binding.tvDetailOrder.text = "$order"
                             binding.tvDetailWeight.text = "$weight"
+                            binding.tvDetailType1.text = uiState.data.type1
+                            binding.tvDetailType2.text = uiState.data.type2
 
-                            types.let {
-                                if (it.size > 0)
-                                    binding.tvDetailType1.text = "${it[0].type?.name}"
-                                if (it.size > 1)
-                                    binding.tvDetailType2.text = "${it[1].type?.name}"
-                            }
+                            (activity as MainActivity).getToolBar()?.title = name.uppercase()
+                            binding.ivDetailSpriteDefault.setName(name)
 
-                            (activity as MainActivity).getToolBar()?.title = name?.uppercase()
-                            binding.ivDetailSpriteDefault.setName(name?.uppercase())
-
-                            sprites?.frontDefault?.let { url ->
-                                binding.ivDetailSpriteDefault.setUrl(url)
-                            }
-
-                            sprites?.let { theSprites ->
-                                binding.rvDetailImages.layoutManager = GridLayoutManager(
-                                    requireContext(),
-                                    2,
-                                    GridLayoutManager.VERTICAL,
-                                    false
+                            binding.ivDetailSpriteDefault.setUrl(
+                                Constants.BASE_URL_SPRITE_FRONTAL.replace(
+                                    "{NUM}",
+                                    "${id}"
                                 )
-                                binding.rvDetailImages.adapter = ImageGridAdapter(theSprites)
-                            }
+                            )
+
+                            binding.rvDetailImages.layoutManager = GridLayoutManager(
+                                requireContext(),
+                                2,
+                                GridLayoutManager.VERTICAL,
+                                false
+                            )
+                            binding.rvDetailImages.adapter = ImageGridAdapter(sprites)
                         }
                     }
                     is State.ErrorState -> {
