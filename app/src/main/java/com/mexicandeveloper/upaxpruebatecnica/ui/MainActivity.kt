@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.MaterialToolbar
+import com.mexicandeveloper.upaxpruebatecnica.NavGraphDirections
 import com.mexicandeveloper.upaxpruebatecnica.R
 import com.mexicandeveloper.upaxpruebatecnica.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +52,10 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                findNavController(R.id.nav_host_fragment_content_main).navigate(NavGraphDirections.callLocation())
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/PokemonList">
+    <action
+        android:id="@+id/callLocation"
+        app:destination="@id/MylocationsFragment"
+        />
 
     <fragment
         android:id="@+id/PokemonList"
@@ -30,4 +34,9 @@
             android:defaultValue="1"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/MylocationsFragment"
+        android:name="com.mexicandeveloper.mylocations.ui.MyLocationsFragment"
+        android:label="@string/locations"
+        />
 </navigation>
